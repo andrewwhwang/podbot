@@ -14,7 +14,7 @@ function getOutputCommand(outputPath, outputFormat) {
 		case outputFormats.PCM:
 			return `-f s16le -ar 48k -ac 2 ${outputPath}`;
 		case outputFormats.WAV:
-			return `${outputPath}.wav`;
+			return `-ar 22050 -ac 1 -b:a 353k ${outputPath}.wav`;
 		default:
 			throw new Error(`Invalid output format specified: ${outputFormat}`);
 	}
