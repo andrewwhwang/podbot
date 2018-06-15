@@ -69,10 +69,10 @@ class Podbot {
 	_onMessage(message) {
 		if (message.content.startsWith(this._config.commandPrefix)) {
 			switch (message.content.slice(this._config.commandPrefix.length)) {
-				case 'podon':
+				case 'on':
 					this._podon(message).catch(log.error.bind(log));
 					break;
-				case 'podoff':
+				case 'off':
 					this._podoff(message).catch(log.error.bind(log));
 					break;
 			}
