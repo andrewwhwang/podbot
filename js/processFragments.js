@@ -78,8 +78,9 @@ async function reassemble(config, outputFormat) {
 		await Promise.all(commands.map(command => doCommand(command)));
 		await reassemble(subConfig, outputFormat);
 	} else {
-		command = `ffmpeg -y ${inputCommand} -filter_complex "${filterCommand}" -map "[a]" ${getOutputCommand(outputPath, outputFormat)}`;
+		command = `ffmpeg -loglevel panic -y ${inputCommand} -filter_complex "${filterCommand}" -map "[a]" ${getOutputCommand(outputPath, outputFormat)}`;
 		await doCommand(command);
+		await doCommand(`sox -q -V3 ${outputPath}.wav ${outputPath}_.wav silence 1 3.0 0.1% 1 0.3 0.1% : newfile : restart`);
 	}
 }
 
