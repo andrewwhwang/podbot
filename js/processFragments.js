@@ -79,7 +79,7 @@ async function reassemble(config, outputFormat) {
 		await reassemble(subConfig, outputFormat);
 	} else {
 		command = `ffmpeg -y ${inputCommand} -filter_complex "${filterCommand}" -map "[a]" ${getOutputCommand(outputPath, outputFormat)}`;
-		doCommand(command);// await doCommand(command);
+		await doCommand(command);
 		// await doCommand(`sox ${outputPath}.wav ${outputPath}_.wav silence 1 1.0 0.1% 1 0.7 0.1% : newfile : restart`);
 	}
 }
