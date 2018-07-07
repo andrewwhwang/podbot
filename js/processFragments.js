@@ -14,7 +14,7 @@ function getOutputCommand(outputPath, outputFormat) {
 		case outputFormats.PCM:
 			return `-f s16le -ar 48k -ac 2 ${outputPath}`;
 		case outputFormats.WAV:
-			return `-ar 22050 -ac 1 -b:a 353k ${outputPath}.wav`;
+			return `-ar 22050 -ac 1 -b:a 128k ${outputPath}.wav`;
 		default:
 			throw new Error(`Invalid output format specified: ${outputFormat}`);
 	}
@@ -79,7 +79,7 @@ async function reassemble(config, outputFormat) {
 		await reassemble(subConfig, outputFormat);
 	} else {
 		command = `ffmpeg -y ${inputCommand} -filter_complex "${filterCommand}" -map "[a]" ${getOutputCommand(outputPath, outputFormat)}`;
-		await doCommand(command);
+		doCommand(command);// await doCommand(command);
 		// await doCommand(`sox ${outputPath}.wav ${outputPath}_.wav silence 1 1.0 0.1% 1 0.7 0.1% : newfile : restart`);
 	}
 }
